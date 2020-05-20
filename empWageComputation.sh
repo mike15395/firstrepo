@@ -9,11 +9,10 @@ is_part_time=2
 total_working_days=0
 total_emp_hrs=0
 
-empcheck=$[(RANDOM%3)]
-while [[ $total_working_days -lt $num_working_days && $total_emp_hrs -lt $max_monthly_hours ]]
-do
-((total_working_days++))
-case $empcheck in
+function get_work_hours()
+{
+	#local $empcheck=$1
+	case $empcheck in
  
 		$is_full_time )
 				emphrs=8
@@ -25,8 +24,17 @@ case $empcheck in
 		* )
 				emphrs=0
 				;;
-esac
-		total_emp_hrs=$[(total_emp_hrs+emphrs)]
-		dailywage=$[(emphrs*wage_per_hour)]
+	esac
+
+	echo $emphrs
+}
+
+empcheck=$[(RANDOM%3)]
+while [[ $total_working_days -lt $num_working_days && $total_emp_hrs -lt $max_monthly_hours ]]
+do
+((total_working_days++))
+
+		total_emp_hrs="$(get_work_hours $empcheck)"
+		dailywage=$[(total_emp_hrs*wage_per_hour)]
 		monthlywage=$[(dailywage*num_working_days)]
 done

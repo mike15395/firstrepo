@@ -16,7 +16,7 @@ case $empcheck in
 			wage=$[($wage_per_hour*$part_time)]
 			;;
 		* )
-			wage=0;
+			wage=0
 			;;
 esac
 

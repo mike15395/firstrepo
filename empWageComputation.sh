@@ -35,6 +35,9 @@ do
 ((total_working_days++))
 
 		total_emp_hrs="$(get_work_hours $empcheck)"
-		dailywage=$[(total_emp_hrs*wage_per_hour)]
-		monthlywage=$[(dailywage*num_working_days)]
+		dailywage[$total_working_days]=$[(total_emp_hrs*wage_per_hour)]
+		monthlywage=$[(dailywage[$total_working_days]*num_working_days)]
 done
+
+echo ${dailywage[@]}
+total_salary=$[(total_emp_hrs*wage_per_hour)]

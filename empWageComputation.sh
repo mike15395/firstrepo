@@ -9,6 +9,7 @@ is_part_time=2
 total_working_days=0
 total_emp_hrs=0
 
+declare -A dailywage
 function get_work_hours()
 {
 	#local $empcheck=$1
@@ -35,7 +36,7 @@ do
 ((total_working_days++))
 
 		total_emp_hrs="$(get_work_hours $empcheck)"
-		dailywage[$total_working_days]=$[(total_emp_hrs*wage_per_hour)]
+		dailywage["Day"$total_working_days]=$[(total_emp_hrs*wage_per_hour)]
 		monthlywage=$[(dailywage[$total_working_days]*num_working_days)]
 done
 

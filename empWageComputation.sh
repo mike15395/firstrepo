@@ -1,10 +1,14 @@
 #!/bin/bash -x
 
+wage_per_hour=20
+full_time=8
+
 empcheck=$[(RANDOM%2)]
 
 if (( $empcheck ==1 ))
 then
-	echo "employee present"
+	wage=$[($wage_per_hour*$full_time)]
 else
-	echo "employee absent"
+	wage=0
 fi
+
